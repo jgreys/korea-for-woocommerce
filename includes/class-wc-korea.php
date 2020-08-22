@@ -53,19 +53,39 @@ class WC_Korea {
 	 * *Singleton* via the `new` operator from outside of this class.
 	 */
 	private function __construct() {
-		if ( ! $this->are_requirements_met() ) {
+		// Load text domain.
+		$this->load_plugin_textdomain();
+
+		// Verify required plugins.
+		if ( ! $this->requirements() ) {
 			return;
 		}
 
-		$this->load_plugin_textdomain();
+		// Includes files.
 		$this->includes();
-		$this->init();
+
+		// Hooks
+		add_filter( 'plugin_action_links_' . plugin_basename( WC_KOREA_MAIN_FILE ), array( $this, 'plugin_action_links' ) );
+		add_filter( 'woocommerce_integrations', array( $this, 'wc_integrations' ) );
+		add_filter( 'query_vars', array( $this, 'wc_sep_query_var' ) );
 	}
 
 	/**
-	 * Verify if the requirements are met
+	 * Activation hook.
 	 */
-	public function are_requirements_met() {
+	public static function activate() {
+		if ( ! $this->requirements() ) {
+			deactivate_plugins( plugin_basename( WC_KOREA_MAIN_FILE ) );
+			return;
+		}
+	}
+
+	/**
+	 * Verify if required plugins are installed and activated.
+	 *
+	 * @return boolean
+	 */
+	public function requirements() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
@@ -132,15 +152,6 @@ class WC_Korea {
 
 		// License for Korea for WooCommerce Addons.
 		require_once dirname( __FILE__ ) . '/updater/class-wc-korea-license.php';
-	}
-
-	/**
-	 * Init the plugin after plugins_loaded so environment variables are set.
-	 */
-	public function init() {
-		add_filter( 'woocommerce_integrations', array( $this, 'wc_integrations' ) );
-		add_filter( 'plugin_action_links_' . plugin_basename( WC_KOREA_MAIN_FILE ), array( $this, 'plugin_action_links' ) );
-		add_filter( 'query_vars', array( $this, 'wc_sep_query_var' ) );
 	}
 
 	/**
