@@ -117,7 +117,6 @@ class WC_Korea {
 	 */
 	public function includes() {
 		if ( is_admin() ) {
-			require_once WC_KOREA_ABSPATH . '/includes/admin/class-wc-korea-admin-ajax.php';
 			require_once WC_KOREA_ABSPATH . '/includes/admin/class-wc-korea-admin.php';
 
 			// Addons.
