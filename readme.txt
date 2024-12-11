@@ -91,10 +91,10 @@ The manual installation method involves downloading our plugin and uploading it 
 
 == Changelog ==
 
-- 1.1.12 - 2024-12-11 =
+= 1.1.12 - 2024-12-11 =
 * Fix - Vulnerability to Sensitive Data Exposure (Thanks to @mika_sec for the report)
 
-- 1.1.11 - 2024-09-24 =
+= 1.1.11 - 2024-09-24 =
 * Fix - Enable HPOS compatibility
 * Updated WordPress & WooCommerce requirements
 
