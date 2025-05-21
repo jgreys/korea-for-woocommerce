@@ -2,6 +2,8 @@ name: Releases
 on:
   release:
     types: [published]
+permissions:
+  contents: write
 jobs:
   tag:
     name: New release
