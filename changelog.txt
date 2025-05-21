@@ -1,5 +1,8 @@
 == Changelog ==
 
+- 1.1.13 - 2025-05-21 =
+* Updated WordPress & WooCommerce requirements
+
 - 1.1.12 - 2024-12-11 =
 * Fix - Vulnerability to Sensitive Data Exposure (Thanks to @mika_sec for the report)
 
