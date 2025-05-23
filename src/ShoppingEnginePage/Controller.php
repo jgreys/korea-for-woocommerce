@@ -6,7 +6,7 @@
 namespace Greys\WooCommerce\Korea\ShoppingEnginePage;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 use Greys\WooCommerce\Korea\ShoppingEnginePage\Daum;
@@ -17,11 +17,11 @@ use Greys\WooCommerce\Korea\ShoppingEnginePage\Naver;
  */
 class Controller {
 
-	/**
-	 * Class constructor
-	 */
-	public function __construct() {
-		add_filter( 'query_vars', array( $this, 'add_query_var' ) );
-	}
+    /**
+     * Class constructor
+     */
+    public function __construct() {
+        add_filter( 'query_vars', array( $this, 'add_query_var' ) );
+    }
 
 }

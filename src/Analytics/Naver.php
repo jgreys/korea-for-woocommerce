@@ -6,7 +6,7 @@
 namespace Greys\WooCommerce\Korea\Analytics;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 use const Greys\WooCommerce\Korea\Version as VERSION;
@@ -16,42 +16,49 @@ use const Greys\WooCommerce\Korea\Version as VERSION;
  */
 class Naver {
 
-	/**
-	 * Initialize
-	 */
-	public function __construct() {
-		$settings = get_option( 'woocommerce_korea_settings' );
+    /**
+     * Naver Analytics ID
+     *
+     * @var string
+     */
+    private $id;
 
-		$this->id = isset( $settings['naver_analytics'] ) && ! empty( $settings['naver_analytics'] ) ? sanitize_text_field( $settings['naver_analytics'] ) : null;
+    /**
+     * Initialize
+     */
+    public function __construct() {
+        $settings = get_option( 'woocommerce_korea_settings' );
 
-		if ( ! $this->id ) {
-			return;
-		}
+        $this->id = isset( $settings['naver_analytics'] ) && ! empty( $settings['naver_analytics'] ) ? sanitize_text_field( $settings['naver_analytics'] ) : null;
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
-		add_action( 'wp_footer', array( $this, 'wp_footer' ) );
-	}
+        if ( ! $this->id ) {
+            return;
+        }
 
-	/**
-	 * Enqueue Naver Analytics script
-	 */
-	public function wp_enqueue_scripts() {
-		wp_enqueue_script( 'wc-korea-naver-analytics', '//wcs.naver.net/wcslog.js', array(), VERSION, true );
-	}
+        add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
+        add_action( 'wp_footer', array( $this, 'wp_footer' ) );
+    }
 
-	/**
-	 * Add Naver Analytics
-	 */
-	public function wp_footer() {
-		?>
-		<script type="text/javascript">
-			if ( !wcs_add ) {
-				var wcs_add = {};
-			}
-			wcs_add['wa'] = "<?php echo esc_js( $this->id ); ?>";
-			wcs_do();
-		</script>
-		<?php
-	}
+    /**
+     * Enqueue Naver Analytics script
+     */
+    public function wp_enqueue_scripts() {
+        wp_enqueue_script( 'wc-koreakit-naver-analytics', '//wcs.naver.net/wcslog.js', array(), VERSION, true );
+    }
+
+    /**
+     * Add Naver Analytics
+     */
+    public function wp_footer() {
+        ?>
+        <script type="text/javascript">
+            if ( !wcs_add ) {
+                var wcs_add = {};
+            }
+            wcs_add['wa'] = "<?php echo esc_js( $this->id ); ?>";
+            wcs_do();
+        </script>
+        <?php
+    }
 
 }

@@ -126,4 +126,4 @@ The manual installation method involves downloading our plugin and uploading it 
 * Fix - Postcode finder is now working for shipping address fields
 * Fix - Minor bug fixes
 
-[See changelog for all versions.](https://raw.githubusercontent.com/jgreys/korea-for-woocommerce/master/changelog.txt)
+[See changelog for all versions.](https://raw.githubusercontent.com/jgreys/korea-for-woocommerce/main/changelog.txt)

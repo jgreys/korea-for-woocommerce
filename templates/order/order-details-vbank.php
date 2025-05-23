@@ -18,37 +18,37 @@
 
 ?>
 <section class="woocommerce-vbank-details">
-	<h2 class="woocommerce-vbank-details__title"><?php esc_html_e( 'Virtual Bank details', 'korea-for-woocommerce' ); ?></h2>
-	<table class="woocommerce-table woocommerce-table--vbank-details shop_table order_details">
-		<thead>
-			<tr>
-				<?php
-				foreach ( $account_fields as $field_key => $field ) {
-					if ( ! empty( $field['value'] ) ) {
-						?>
-						<th class="td" style="text-align:center;">
-							<?php echo wp_kses_post( wptexturize( $field['label'] ) ); ?>
-						</th>
-						<?php
-					}
-				}
-				?>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<?php
-				foreach ( $account_fields as $field_key => $field ) {
-					if ( ! empty( $field['value'] ) ) {
-						?>
-						<td class="td" style="text-align:center;">
-							<?php echo wp_kses_post( wptexturize( $field['value'] ) ); ?>
-						</td>
-						<?php
-					}
-				}
-				?>
-			</tr>
-		</tbody>
-	</table>
+    <h2 class="woocommerce-vbank-details__title"><?php esc_html_e( 'Virtual Bank details', 'korea-for-woocommerce' ); ?></h2>
+    <table class="woocommerce-table woocommerce-table--vbank-details shop_table order_details">
+        <thead>
+            <tr>
+                <?php
+                foreach ( $account_fields as $field_key => $field ) {
+                    if ( ! empty( $field['value'] ) ) {
+                        ?>
+                        <th class="td" style="text-align:center;">
+                            <?php echo wp_kses_post( wptexturize( $field['label'] ) ); ?>
+                        </th>
+                        <?php
+                    }
+                }
+                ?>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <?php
+                foreach ( $account_fields as $field_key => $field ) {
+                    if ( ! empty( $field['value'] ) ) {
+                        ?>
+                        <td class="td" style="text-align:center;">
+                            <?php echo wp_kses_post( wptexturize( $field['value'] ) ); ?>
+                        </td>
+                        <?php
+                    }
+                }
+                ?>
+            </tr>
+        </tbody>
+    </table>
 </section>

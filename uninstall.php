@@ -8,12 +8,12 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 // if uninstall not called from WordPress exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
+    exit;
 }
 
 /*
@@ -22,6 +22,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  * and to ensure only the site owner can perform this action.
  */
 if ( defined( 'WC_KOREA_REMOVE_ALL_DATA' ) && true === WC_KOREA_REMOVE_ALL_DATA ) {
-	// Delete options.
-	delete_option( 'woocommerce_korea' );
+    // Delete options.
+    delete_option( 'woocommerce_korea' );
 }

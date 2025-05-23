@@ -1,0 +1,175 @@
+.wc_koreakit_addons_wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 0 auto;
+
+    .addon {
+        height: 230px;
+        position: relative;
+        padding: 0;
+        vertical-align: top;
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 5px;
+        outline: 1.5px solid #ddd;
+
+        .title {
+            margin: 0;
+            padding: 20px 12px;
+            background: #fff;
+        }
+
+        .desc {
+            margin: 0;
+            padding: 12px;
+            border-top: 1px solid #fff;
+        }
+
+        .cta {
+            display: block;
+            width: 100%;
+            text-align: right;
+            padding: 10px 12px;
+            background: white;
+        }
+
+        .price {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            background: #ffffff;
+
+            span {
+                color: #1a1a1a;
+                font-weight: 600;
+            }
+        }
+
+        & > .bottom {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 2px;
+            box-sizing: border-box;
+        }
+
+        .regular-text {
+            width: 100% !important;
+        }
+
+        &:hover {
+            outline: 1.5px solid var(--wp-admin-theme-color);
+        }
+    }
+
+    @media only screen and (min-width: 600px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media only screen and (min-width: 768px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 782px) {
+        .addon {
+            .regular-text {
+                height: 30px !important;
+                min-height: auto;
+                line-height: 1;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+.wrap-korea-licenses .form-table,
+.wrap-korea-licenses thead,
+.wrap-korea-licenses tbody,
+.wrap-korea-licenses tfoot,
+.wrap-korea-licenses tr,
+.wrap-korea-licenses td,
+.wrap-korea-licenses th,
+.wrap-korea-licenses caption {
+    display: block;
+}
+.wrap-korea-licenses .form-table tr {
+    float: left;
+    margin: 0 15px 15px 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    width: 30.5%;
+    max-width: 350px;
+    padding: 14px;
+    min-height: 220px;
+    position: relative;
+    box-sizing: border-box;
+}
+.wrap-korea-licenses .form-table th {
+    background: #f9f9f9;
+    padding: 14px !important;
+    border-bottom: 1px solid #ccc;
+    margin: -14px -14px 20px;
+    width: 100%;
+    position: inherit !important;
+}
+.wrap-korea-licenses .form-table td {
+    padding: 0;
+}
+.wrap-korea-licenses td input.regular-text {
+    margin: 0 0 8px !important;
+    width: 100% !important;
+}
+.wrap-korea-licenses .wc-korea-license-data[class*="wc-korea-license-"] {
+    position: absolute;
+    background: #fafafa;
+    padding: 14px;
+    border-top: 1px solid #eee;
+    margin: 20px -14px -14px;
+    min-height: 67px;
+    width: 100%;
+    bottom: 14px;
+    box-sizing: border-box;
+}
+.wrap-korea-licenses .wc-korea-license-data[class*="wc-korea-license-"] a {
+    color: #444;
+}
+.wrap-korea-licenses .wc-korea-license-data[class*="wc-korea-license-"] a:hover {
+    text-decoration: none;
+}
+.wrap-korea-licenses .wc-korea-license-data.license-expires-soon-notice {
+    background-color: #00a0d2;
+    color: #fff;
+    border-color: #00a0d2;
+}
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-expired {
+    background-color: #e24e4e;
+    color: #fff;
+    border-color: #e24e4e;
+}
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-error,
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-missing,
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-invalid,
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-site_inactive,
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-item_name_mismatch {
+    background-color: #ffebcd;
+    border-color: #ffebcd;
+}
+.wrap-korea-licenses .wc-korea-license-data p {
+    font-size: 13px;
+    margin-top: 0;
+}
+.wrap-korea-licenses .wc-korea-license-data.license-expires-soon-notice a,
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-expired a {
+    color: #fff;
+}
+.wrap-korea-licenses .wc-korea-license-data.license-expires-soon-notice a:hover,
+.wrap-korea-licenses .wc-korea-license-data.wc-korea-license-expired a:hover {
+    text-decoration: none;
+}
+.wrap-korea-licenses p.submit {
+    clear: both;
+}
