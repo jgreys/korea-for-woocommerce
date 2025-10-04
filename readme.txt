@@ -1,7 +1,7 @@
 === Korea for WooCommerce ===
 Tags: woocommerce, korea, korean payment, 우커머스, 우커머스 결제
 Requires at least: 5.0.0
-Tested up to: 6.8
+Tested up to: 6.8.3
 Stable tag: 1.1.13
 Requires PHP: 7.4
 License: GPLv3

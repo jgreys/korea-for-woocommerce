@@ -7,10 +7,10 @@
  * Author: Greys
  * Author URI: https://greys.co/
  * Requires at least: 5.0.0
- * Tested up to: 6.8
+ * Tested up to: 6.8.3
  * Requires Plugins: woocommerce
  * WC requires at least: 3.4.0
- * WC tested up to: 9.8.5
+ * WC tested up to: 10.2.2
  *
  * Text Domain: korea-for-woocommerce
  * Domain Path: /i18n/
