@@ -1,0 +1,181 @@
+name: Monitor WooCommerce & WordPress Updates
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch latest WooCommerce version
+        id: woocommerce
+        run: |
+          LATEST=$(curl -s https://api.github.com/repos/woocommerce/woocommerce/releases/latest | jq -r '.tag_name')
+          echo "latest_version=${LATEST}" >> $GITHUB_OUTPUT
+          curl -s https://api.github.com/repos/woocommerce/woocommerce/releases/latest > woocommerce-release.json
+          echo "Latest WooCommerce version: ${LATEST}"
+
+      - name: Fetch latest WordPress version
+        id: wordpress
+        run: |
+          LATEST=$(curl -s https://api.wordpress.org/core/stable-check/1.0/ | jq -r 'to_entries | map(select(.value == "latest")) | .[0].key')
+          echo "latest_version=${LATEST}" >> $GITHUB_OUTPUT
+          curl -s https://api.wordpress.org/core/stable-check/1.0/ > wordpress-release.json
+          echo "Latest WordPress version: ${LATEST}"
+
+      - name: Get current tested versions from main plugin file
+        id: current
+        run: |
+          if [ -f korea-for-woocommerce.php ]; then
+            WC_VERSION=$(grep "WC tested up to:" korea-for-woocommerce.php | sed 's/.*: *//' | tr -d '\r')
+            WP_VERSION=$(grep "Tested up to:" korea-for-woocommerce.php | sed 's/.*: *//' | tr -d '\r')
+            PLUGIN_VERSION=$(grep "Version:" korea-for-woocommerce.php | head -1 | sed 's/.*: *//' | tr -d '\r')
+            echo "woocommerce_version=${WC_VERSION}" >> $GITHUB_OUTPUT
+            echo "wordpress_version=${WP_VERSION}" >> $GITHUB_OUTPUT
+            echo "plugin_version=${PLUGIN_VERSION}" >> $GITHUB_OUTPUT
+            echo "Current WooCommerce version: ${WC_VERSION}"
+            echo "Current WordPress version: ${WP_VERSION}"
+            echo "Current plugin version: ${PLUGIN_VERSION}"
+          else
+            echo "korea-for-woocommerce.php not found"
+            exit 1
+          fi
+
+      - name: Check if update is needed
+        id: check
+        run: |
+          NEEDS_UPDATE=false
+
+          # Remove 'v' prefix from WooCommerce version if present
+          WC_LATEST="${{ steps.woocommerce.outputs.latest_version }}"
+          WC_LATEST="${WC_LATEST#v}"
+
+          if [ "${WC_LATEST}" != "${{ steps.current.outputs.woocommerce_version }}" ]; then
+            echo "WooCommerce update available: ${WC_LATEST}"
+            NEEDS_UPDATE=true
+          fi
+
+          if [ "${{ steps.wordpress.outputs.latest_version }}" != "${{ steps.current.outputs.wordpress_version }}" ]; then
+            echo "WordPress update available: ${{ steps.wordpress.outputs.latest_version }}"
+            NEEDS_UPDATE=true
+          fi
+
+          echo "needs_update=${NEEDS_UPDATE}" >> $GITHUB_OUTPUT
+
+      - name: Update compatibility with Claude Code
+        if: steps.check.outputs.needs_update == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          settings: |
+            {
+              "permissions": {
+                "allow": ["Edit", "Read", "Write", "WebFetch", "WebSearch", "Bash"]
+              }
+            }
+          prompt: |
+            You are tasked with updating the WooCommerce and WordPress compatibility for the korea-for-woocommerce plugin.
+
+            **Current versions:**
+            - WooCommerce: ${{ steps.current.outputs.woocommerce_version }}
+            - WordPress: ${{ steps.current.outputs.wordpress_version }}
+            - Plugin version: ${{ steps.current.outputs.plugin_version }}
+
+            **Latest versions available:**
+            - WooCommerce: ${{ steps.woocommerce.outputs.latest_version }}
+            - WordPress: ${{ steps.wordpress.outputs.latest_version }}
+
+            **Release information:**
+            The WooCommerce release notes are available at: woocommerce-release.json
+            The WordPress version information is available at: wordpress-release.json
+
+            **About this plugin:**
+            Korea for WooCommerce enhances WooCommerce for Korean customers with:
+            - Korean address postcode finder (Daum Postcode API integration)
+            - Phone number validation and formatting for Korean numbers
+            - Naver Analytics integration
+            - Naver Shopping and Daum Shopping product feeds
+            - Korean delivery company tracking (Korea Post, CJ Logistics, etc.)
+            - Kakao Channel and Naver TalkTalk chat buttons
+            - Abstract payment gateway class (WC_Korea_Payment_Gateway) that extends WC_Payment_Gateway
+            - Uses WooCommerce hooks: woocommerce_after_checkout_validation, woocommerce_checkout_create_order, woocommerce_checkout_update_customer
+            - HPOS (High-Performance Order Storage) compatible
+
+            **Your tasks:**
+
+            1. **Analyze breaking changes**: Read woocommerce-release.json and analyze the release notes for any breaking changes that might affect korea-for-woocommerce, specifically:
+               - Payment gateway base class (WC_Payment_Gateway) changes - we have abstract-wc-korea-payment-gateway.php extending it
+               - Checkout validation hooks (woocommerce_after_checkout_validation)
+               - Order creation hooks (woocommerce_checkout_create_order, woocommerce_checkout_update_customer)
+               - Customer/Order object methods (set_billing_phone, etc.)
+               - Address field handling and localization
+               - HPOS compatibility changes
+               - WooCommerce settings/integration class changes
+               - Shipment tracking integrations
+               - Any deprecated functions or hooks we might be using
+
+            2. **Update korea-for-woocommerce.php**: Update the plugin header comments:
+               - Line 10: "Tested up to:" to ${{ steps.wordpress.outputs.latest_version }}
+               - Line 13: "WC tested up to:" to ${{ steps.woocommerce.outputs.latest_version }} (remove 'v' prefix if present)
+
+            3. **Update readme.txt**: Update the WordPress.org readme:
+               - Line 4: "Tested up to:" to ${{ steps.wordpress.outputs.latest_version }}
+
+            4. **Update changelog.txt**: Add a new changelog entry at the TOP of the file following the existing format (note the inconsistent format - some use "=" some use "-"):
+               ```
+               = ${{ steps.current.outputs.plugin_version }} - [YYYY-MM-DD] =
+               * Updated WordPress & WooCommerce requirements
+
+               ```
+               Use today's date in YYYY-MM-DD format and the CURRENT plugin version (${{ steps.current.outputs.plugin_version }}).
+
+            5. **Create a Pull Request** with:
+               - **Title**: "Update WooCommerce compatibility to ${{ steps.woocommerce.outputs.latest_version }}"
+               - **Description** using this template:
+               ```markdown
+               ## Summary
+               Updates compatibility declarations for:
+               - WooCommerce: ${{ steps.current.outputs.woocommerce_version }} → ${{ steps.woocommerce.outputs.latest_version }}
+               - WordPress: ${{ steps.current.outputs.wordpress_version }} → ${{ steps.wordpress.outputs.latest_version }}
+
+               ## Breaking Changes Analysis
+               [Analyze woocommerce-release.json and list any breaking changes that could affect our plugin, or state "No breaking changes identified that affect korea-for-woocommerce"]
+
+               ## Files Updated
+               - `korea-for-woocommerce.php` - Updated version headers
+               - `readme.txt` - Updated tested up to version
+               - `changelog.txt` - Added compatibility update entry
+
+               ## Testing Checklist
+               Before merging, please test:
+               - [ ] Korean postcode finder (Daum API) on checkout page
+               - [ ] Phone number validation and formatting for Korean numbers
+               - [ ] Address field order for Korean addresses
+               - [ ] HPOS compatibility (High-Performance Order Storage)
+               - [ ] WooCommerce Shipment Tracking integration (Korean carriers)
+               - [ ] Naver Analytics tracking
+               - [ ] Kakao Channel / Naver TalkTalk chat buttons
+               - [ ] Payment gateway integrations (if available)
+
+               ## References
+               - WooCommerce Release: https://github.com/woocommerce/woocommerce/releases/tag/${{ steps.woocommerce.outputs.latest_version }}
+               ```
+
+            **Important notes:**
+            - Do NOT change the plugin version number - only update "Tested up to" and "WC tested up to"
+            - Be thorough in analyzing breaking changes, especially around checkout hooks and payment gateway base class
+            - If you find critical breaking changes, mention them prominently in the PR description
+            - Do not modify any code files unless you find actual breaking changes that require fixes
+            - The changelog.txt format is inconsistent - follow the pattern shown (some entries use "=" and some use "-")
