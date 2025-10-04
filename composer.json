@@ -1,5 +1,5 @@
 {
-	"name": "koreakit/korea-for-woocommerce",
+	"name": "greys/korea-for-woocommerce",
 	"type": "wordpress-plugin",
 	"description": "WooCommerce Toolkit for Korean use.",
 	"homepage": "https://wordpress.org/plugins/korea-for-woocommerce/",
@@ -20,7 +20,7 @@
 	},
 	"extra": {
 		"scripts-description": {
-			"makepot": "Generate i18n/woocommerce-gateway-kcp.pot file",
+			"makepot": "Generate i18n/korea-for-woocommerce.pot file",
 			"makepot-audit": "Generate i18n/woocommerce-gateway-kcp.pot file and run audit",
 			"phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier",
 			"phpcs": "Analyze code against the WordPress coding standards with PHP_CodeSniffer",
