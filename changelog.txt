@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.1.13 - 2025-10-05 =
+* Updated WordPress & WooCommerce requirements
+
 - 1.1.13 - 2025-05-21 =
 * Updated WordPress & WooCommerce requirements
 
