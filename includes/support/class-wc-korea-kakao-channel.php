@@ -14,6 +14,48 @@ defined( 'ABSPATH' ) || exit;
 class WC_Korea_Kakao_Channel {
 
 	/**
+	 * Whether Kakao Channel is enabled.
+	 *
+	 * @var bool
+	 */
+	protected $enabled;
+
+	/**
+	 * Kakao Channel ID.
+	 *
+	 * @var string|null
+	 */
+	protected $id;
+
+	/**
+	 * Kakao App Key.
+	 *
+	 * @var string|null
+	 */
+	protected $appkey;
+
+	/**
+	 * Button type.
+	 *
+	 * @var string
+	 */
+	protected $btntype;
+
+	/**
+	 * Button size.
+	 *
+	 * @var string
+	 */
+	protected $btnsize;
+
+	/**
+	 * Button color.
+	 *
+	 * @var string
+	 */
+	protected $btncolor;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {

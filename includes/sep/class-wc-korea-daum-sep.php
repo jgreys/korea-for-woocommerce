@@ -14,6 +14,13 @@ defined( 'ABSPATH' ) || exit;
 class WC_Korea_Daum_SEP {
 
 	/**
+	 * Whether Daum SEP is enabled.
+	 *
+	 * @var bool
+	 */
+	protected $enabled;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {
