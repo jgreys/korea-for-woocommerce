@@ -14,6 +14,13 @@ defined( 'ABSPATH' ) || exit;
 class WC_Korea_Naver_Analytics {
 
 	/**
+	 * Naver Analytics ID.
+	 *
+	 * @var string|null
+	 */
+	protected $id;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {

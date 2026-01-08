@@ -14,6 +14,83 @@ defined( 'ABSPATH' ) || exit;
 class WC_Korea_Postcode {
 
 	/**
+	 * Whether postcode finder is enabled.
+	 *
+	 * @var bool
+	 */
+	protected $enabled;
+
+	/**
+	 * Display mode.
+	 *
+	 * @var string
+	 */
+	protected $displaymode;
+
+	/**
+	 * Background color.
+	 *
+	 * @var string
+	 */
+	protected $bgcolor;
+
+	/**
+	 * Search background color.
+	 *
+	 * @var string
+	 */
+	protected $searchbgcolor;
+
+	/**
+	 * Content background color.
+	 *
+	 * @var string
+	 */
+	protected $contentbgcolor;
+
+	/**
+	 * Page background color.
+	 *
+	 * @var string
+	 */
+	protected $pagebgcolor;
+
+	/**
+	 * Text color.
+	 *
+	 * @var string
+	 */
+	protected $textcolor;
+
+	/**
+	 * Query text color.
+	 *
+	 * @var string
+	 */
+	protected $querytxtcolor;
+
+	/**
+	 * Postal code text color.
+	 *
+	 * @var string
+	 */
+	protected $postalcodetxtcolor;
+
+	/**
+	 * Emphasis text color.
+	 *
+	 * @var string
+	 */
+	protected $emphtxtcolor;
+
+	/**
+	 * Outline color.
+	 *
+	 * @var string
+	 */
+	protected $outlinecolor;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {

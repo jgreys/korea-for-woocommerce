@@ -16,6 +16,13 @@ defined( 'ABSPATH' ) || exit;
 class WC_Korea_Integration extends WC_Integration {
 
 	/**
+	 * Current settings category.
+	 *
+	 * @var string
+	 */
+	protected $category;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {

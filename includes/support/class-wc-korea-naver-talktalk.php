@@ -14,6 +14,27 @@ defined( 'ABSPATH' ) || exit;
 class WC_Korea_Naver_TalkTalk {
 
 	/**
+	 * Settings array.
+	 *
+	 * @var array|false
+	 */
+	protected $settings;
+
+	/**
+	 * Whether Naver TalkTalk is enabled.
+	 *
+	 * @var bool
+	 */
+	protected $enabled;
+
+	/**
+	 * Naver TalkTalk ID.
+	 *
+	 * @var string
+	 */
+	protected $id;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {

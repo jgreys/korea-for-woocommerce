@@ -14,6 +14,13 @@ defined( 'ABSPATH' ) || exit;
 class WC_Korea_Addons {
 
 	/**
+	 * Current tab.
+	 *
+	 * @var string
+	 */
+	protected $tab;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {
