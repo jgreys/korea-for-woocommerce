@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.1.15 - 2026-03-31 =
+* Fix - Include built JS and CSS assets in plugin distribution
+
 = 1.1.14 - 2026-01-07 =
 * Fix - Resolved PHP 8.2+ deprecation warnings for dynamic property creation
 * Updated WordPress & WooCommerce requirements
