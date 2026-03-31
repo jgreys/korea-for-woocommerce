@@ -18,7 +18,7 @@
         "@wordpress/scripts": "^30.1.0"
     },
     "scripts": {
-        "build": "npx wp-scripts build",
+        "build": "npm run build:js && npm run build:css",
         "build:css": "npx wp-scripts build 'assets/src/scss/**/*.scss' --output-path 'assets/css'",
         "build:js": "npx wp-scripts build 'assets/src/js/**/*.js' --output-path 'assets/js'",
         "check-engines": "npx wp-scripts check-engines",
