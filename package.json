@@ -19,8 +19,8 @@
     },
     "scripts": {
         "build": "npm run build:js && npm run build:css",
-        "build:css": "npx wp-scripts build 'assets/src/scss/**/*.scss' --output-path 'assets/css'",
-        "build:js": "npx wp-scripts build 'assets/src/js/**/*.js' --output-path 'assets/js'",
+        "build:css": "npx wp-scripts build assets/src/scss/admin.scss --output-path assets/css",
+        "build:js": "npx wp-scripts build assets/src/js/wc-korea-postcode.js assets/src/js/admin/addons.js assets/src/js/admin/settings.js --output-path assets/js",
         "check-engines": "npx wp-scripts check-engines",
         "check-licenses": "npx wp-scripts check-licenses",
         "format": "npx wp-scripts format",
