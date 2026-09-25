@@ -2,6 +2,9 @@
 
 = 1.1.16 - 2026-09-25 =
 * Fix - Virtual bank details on the thank you page fit on phones
+* Fix - Admin settings scripts and styles load again
+* Fix - PHP 8.2+ warnings in the license and updater
+* Tweak - Tested with WordPress 7.1 and WooCommerce 11.1
 
 = 1.1.15 - 2026-03-31 =
 * Fix - Include built JS and CSS assets in plugin distribution
