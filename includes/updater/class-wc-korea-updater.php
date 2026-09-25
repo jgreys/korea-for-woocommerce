@@ -78,6 +78,13 @@ class WC_Korea_Updater {
 	 */
 	private $api_url_available = array();
 
+	/**
+	 * Whether to get beta versions
+	 *
+	 * @var bool $beta
+	 */
+	private $beta = false;
+
 
 	/**
 	 * Class constructor.

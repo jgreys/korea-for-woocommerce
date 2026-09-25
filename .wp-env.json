@@ -8,11 +8,18 @@
 		"FS_METHOD": "direct"
 	},
 	"plugins": [
-		"https://downloads.wordpress.org/plugin/woocommerce.latest-stable.zip",
-		"https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip",
+		"https://downloads.wordpress.org/plugin/woocommerce.zip",
+		"https://downloads.wordpress.org/plugin/wordpress-importer.zip",
 		"."
 	],
 	"themes": [
-		"https://downloads.wordpress.org/theme/storefront.latest-stable.zip"
-	]
+		"https://downloads.wordpress.org/theme/storefront.zip"
+	],
+	"env": {
+		"tests": {
+			"config": {
+				"WP_DEBUG_DISPLAY": true
+			}
+		}
+	}
 }

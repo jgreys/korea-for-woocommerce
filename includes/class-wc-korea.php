@@ -166,7 +166,7 @@ class WC_Korea {
 	 * also loaded early on the order pages, so it is ready before the page shows.
 	 */
 	public function enqueue_styles() {
-		wp_register_style( 'wc-korea-order-vbank', plugins_url( 'assets/css/order-vbank.scss.css', WC_KOREA_MAIN_FILE ), array(), WC_KOREA_VERSION );
+		wp_register_style( 'wc-korea-order-vbank', plugins_url( 'assets/css/order-vbank.css', WC_KOREA_MAIN_FILE ), array(), WC_KOREA_VERSION );
 		wp_style_add_data( 'wc-korea-order-vbank', 'rtl', 'replace' );
 
 		if ( is_order_received_page() || is_view_order_page() ) {
