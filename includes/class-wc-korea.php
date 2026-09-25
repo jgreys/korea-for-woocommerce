@@ -155,6 +155,37 @@ class WC_Korea {
 		add_filter( 'woocommerce_integrations', array( $this, 'wc_integrations' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( WC_KOREA_MAIN_FILE ), array( $this, 'plugin_action_links' ) );
 		add_filter( 'query_vars', array( $this, 'wc_sep_query_var' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_filter( 'woocommerce_email_styles', array( $this, 'email_styles' ) );
+	}
+
+	/**
+	 * Register the front-end styles.
+	 *
+	 * The virtual bank template enqueues its style when it is shown. It is
+	 * also loaded early on the order pages, so it is ready before the page shows.
+	 */
+	public function enqueue_styles() {
+		wp_register_style( 'wc-korea-order-vbank', plugins_url( 'assets/css/order-vbank.scss.css', WC_KOREA_MAIN_FILE ), array(), WC_KOREA_VERSION );
+		wp_style_add_data( 'wc-korea-order-vbank', 'rtl', 'replace' );
+
+		if ( is_order_received_page() || is_view_order_page() ) {
+			wp_enqueue_style( 'wc-korea-order-vbank' );
+		}
+	}
+
+	/**
+	 * Style the virtual bank details in emails.
+	 *
+	 * @param string $css Email CSS.
+	 * @return string
+	 */
+	public function email_styles( $css ) {
+		return $css . '
+			.woocommerce-vbank-details__list { margin: 0 0 16px; padding: 0; }
+			.woocommerce-vbank-details__label { margin: 0; }
+			.woocommerce-vbank-details__value { margin: 0 0 12px; font-weight: bold; }
+		';
 	}
 
 	/**
