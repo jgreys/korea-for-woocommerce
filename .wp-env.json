@@ -14,5 +14,12 @@
 	],
 	"themes": [
 		"https://downloads.wordpress.org/theme/storefront.latest-stable.zip"
-	]
+	],
+	"env": {
+		"tests": {
+			"config": {
+				"WP_DEBUG_DISPLAY": true
+			}
+		}
+	}
 }
