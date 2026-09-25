@@ -86,6 +86,20 @@ class WC_Korea_License {
     protected $settings;
 
     /**
+     * Plugin path
+     *
+     * @var string $path
+     */
+    protected $path;
+
+    /**
+     * Plugin header data
+     *
+     * @var array $data
+     */
+    protected $data;
+
+    /**
      * Class constructor
      *
      * @param string $_id
