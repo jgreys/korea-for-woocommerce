@@ -1,0 +1,41 @@
+.woocommerce-vbank-details {
+	margin: 2em 0;
+
+	&__list {
+		margin: 0;
+		padding: 0;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		border-radius: 4px;
+	}
+
+	&__item {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.25em 1em;
+		margin: 0;
+		padding: 0.85em 1em;
+
+		& + & {
+			border-top: 1px solid rgba(0, 0, 0, 0.12);
+		}
+	}
+
+	&__label {
+		margin: 0;
+		font-weight: 400;
+		opacity: 0.75;
+	}
+
+	&__value {
+		margin: 0;
+		font-weight: 600;
+		text-align: right;
+		overflow-wrap: anywhere;
+	}
+
+	&__item--account_number &__value {
+		font-variant-numeric: tabular-nums;
+		letter-spacing: 0.02em;
+	}
+}

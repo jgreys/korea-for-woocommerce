@@ -1,7 +1,7 @@
 {
     "name": "korea-for-woocommerce",
     "title": "Korea for WooCommerce",
-    "version": "1.1.15",
+    "version": "1.1.16",
     "description": "WooCommerce Toolkit for Korean use.",
     "author": "Greys",
     "license": "GPL-2.0-or-later",
@@ -19,7 +19,7 @@
     },
     "scripts": {
         "build": "npm run build:js && npm run build:css",
-        "build:css": "npx wp-scripts build assets/src/scss/admin.scss --output-path assets/css",
+        "build:css": "npx wp-scripts build assets/src/scss/admin.scss assets/src/scss/order-vbank.scss --output-path assets/css",
         "build:js": "npx wp-scripts build assets/src/js/wc-korea-postcode.js assets/src/js/admin/addons.js assets/src/js/admin/settings.js --output-path assets/js",
         "check-engines": "npx wp-scripts check-engines",
         "check-licenses": "npx wp-scripts check-licenses",

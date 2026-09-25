@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.1.16 - 2026-09-25 =
+* Fix - Virtual bank details on the thank you page fit on phones
+
 = 1.1.15 - 2026-03-31 =
 * Fix - Include built JS and CSS assets in plugin distribution
 
