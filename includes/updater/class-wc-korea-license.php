@@ -244,7 +244,7 @@ class WC_Korea_License {
     public function add_styles() {
         $section = isset( $_GET['section'] ) && ! empty( $_GET['section'] ) ? sanitize_key( wp_unslash( $_GET['section'] ) ) : null; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( 'wc-korea' === $section ) {
-            wp_enqueue_style( 'wc-korea-license-settings', WC_KOREA_PLUGIN_URL . '/assets/css/admin.css', array(), $this->version );
+            wp_enqueue_style( 'wc-korea-license-settings', WC_KOREA_PLUGIN_URL . '/assets/css/admin.scss.css', array(), $this->version );
         }
     }
 

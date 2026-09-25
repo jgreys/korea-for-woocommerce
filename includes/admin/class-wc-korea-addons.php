@@ -42,7 +42,7 @@ class WC_Korea_Addons {
 		$section = isset( $_GET['section'] ) && ! empty( $_GET['section'] ) ? sanitize_key( wp_unslash( $_GET['section'] ) ) : null; // @codingStandardsIgnoreLine WordPress.Security.NonceVerification.Recommended
 
 		if ( ! wp_script_is( 'wc-korea-addons', 'enqueued' ) ) {
-			wp_enqueue_script( 'wc-korea-addons', plugins_url( 'assets/js/admin/addons.js', WC_KOREA_MAIN_FILE ), array(), WC_KOREA_VERSION, true );
+			wp_enqueue_script( 'wc-korea-addons', plugins_url( 'assets/js/addons.js', WC_KOREA_MAIN_FILE ), array( 'jquery' ), WC_KOREA_VERSION, true );
 			wp_localize_script(
 				'wc-korea-addons',
 				'wc_korea_addons_params',

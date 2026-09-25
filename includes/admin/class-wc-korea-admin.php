@@ -28,8 +28,8 @@ class WC_Korea_Admin {
 			return;
 		}
 
-		wp_enqueue_script( 'wc-korea-admin', plugins_url( 'assets/js/admin.js', WC_KOREA_MAIN_FILE ), array(), WC_KOREA_VERSION, true );
-		wp_enqueue_style( 'wc-korea-admin', plugins_url( 'assets/css/admin.css', WC_KOREA_MAIN_FILE ), array(), WC_KOREA_VERSION, true );
+		wp_enqueue_style( 'wc-korea-admin', plugins_url( 'assets/css/admin.scss.css', WC_KOREA_MAIN_FILE ), array(), WC_KOREA_VERSION );
+		wp_style_add_data( 'wc-korea-admin', 'rtl', 'replace' );
 	}
 
 }
